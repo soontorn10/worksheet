@@ -274,6 +274,56 @@
             margin-bottom: 20px;
             color: var(--text-color);
         }
+        /* NEW: Styles for the print/image-ready version */
+        .printable-summary {
+            padding: 20px;
+            background-color: var(--card-color);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .printable-summary .summary-title, .printable-summary .summary-info, .printable-summary .score-display {
+            margin-bottom: 15px;
+        }
+        .printable-summary .summary-table {
+            margin-top: 15px;
+        }
+        .printable-summary .summary-table th, .printable-summary .summary-table td {
+            padding: 8px; /* Compact padding */
+            font-size: 0.9rem; /* Smaller font for better fit */
+        }
+        .printable-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        .printable-info span {
+            display: block;
+            text-align: center;
+        }
+        /* Fix for mobile view */
+        .summary-info-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .summary-info-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .summary-info-item label {
+            font-weight: bold;
+            color: var(--text-color);
+            font-size: 1.1em;
+        }
 
         .summary-table {
             width: 100%;
@@ -329,29 +379,6 @@
             border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* NEW: Styles for the print/image-ready version */
-        .printable-summary {
-            padding: 20px;
-            background-color: var(--card-color);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
-            text-align: center;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .printable-summary .summary-title, .printable-summary .summary-info, .printable-summary .score-display {
-            margin-bottom: 15px;
-        }
-        .printable-summary .summary-table {
-            margin-top: 15px;
-        }
-        .printable-summary .summary-table th, .printable-summary .summary-table td {
-            padding: 8px; /* Compact padding */
-            font-size: 0.9rem; /* Smaller font for better fit */
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
@@ -464,7 +491,11 @@
             <h1>สรุปผลการทำใบงาน</h1>
             <p>ใบงานที่ ๓.๓ เรื่อง: บทเพลงไทยแต่ละชนิด</p>
         </div>
-        <div class="info" id="summary-student-info"></div>
+        <div class="summary-info-wrapper">
+            <div class="summary-info-item"><label>ชื่อ-สกุล:</label> <span id="summary-name"></span></div>
+            <div class="summary-info-item"><label>ชั้น:</label> <span id="summary-class"></span></div>
+            <div class="summary-info-item"><label>เลขที่:</label> <span id="summary-number"></span></div>
+        </div>
         <div class="score-display">
             คะแนนรวม: <span id="score">0</span> / 10
         </div>
@@ -566,12 +597,9 @@
         });
         
         // Update summary info for the printable view
-        const summaryInfoDiv = document.getElementById('summary-student-info');
-        summaryInfoDiv.innerHTML = `
-            <span><label>ชื่อ-สกุล:</label> ${studentName}</span>
-            <span><label>ชั้น:</label> ${studentClass}</span>
-            <span><label>เลขที่:</label> ${studentNumber}</span>
-        `;
+        document.getElementById('summary-name').innerText = studentName;
+        document.getElementById('summary-class').innerText = studentClass;
+        document.getElementById('summary-number').innerText = studentNumber;
 
         document.getElementById('score').innerText = score;
     }
@@ -580,7 +608,7 @@
         const summaryElement = document.getElementById('printable-summary-section');
         
         html2canvas(summaryElement, {
-            scale: 2, // You can adjust this value
+            scale: 2, 
             logging: false,
             useCORS: true
         }).then(canvas => {
