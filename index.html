@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ใบงานที่ ๓.๓</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
+        
+        :root {
+            --primary-color: #0D47A1;
+            --secondary-color: #1976D2;
+            --light-blue-1: #E3F2FD;
+            --light-blue-2: #BBDEFB;
+            --light-blue-3: #90CAF9;
+            --text-color: #212121;
+            --bg-color: #F8F9FA;
+            --card-bg: #FFFFFF;
+            --correct-color: #4CAF50;
+            --incorrect-color: #F44336;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 700px;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .header {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary-color);
+            margin-bottom: 25px;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            color: #757575;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        
+        .info {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 1rem;
+            gap: 20px;
+        }
+        
+        .info span {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .info label {
+            font-size: 0.9em;
+            color: #757575;
+            margin-bottom: 5px;
+        }
+
+        .info input {
+            border: 1px solid var(--light-blue-3);
+            border-bottom: 2px solid var(--secondary-color);
+            background-color: var(--light-blue-1);
+            border-radius: 8px;
+            padding: 10px 12px;
+            outline: none;
+            font-family: inherit;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+        }
+        
+        .info input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 8px rgba(13, 71, 161, 0.4);
+            background-color: var(--light-blue-2);
+        }
+
+        .instructions {
+            padding: 20px;
+            background-color: var(--light-blue-2);
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .song-types-list {
+            padding: 25px;
+            background-color: var(--light-blue-1);
+            border: 1px dashed var(--light-blue-3);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .song-types-list h3 {
+            grid-column: 1 / -1;
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+        
+        .song-types-list span {
+            display: block;
+            padding: 12px;
+            background: var(--light-blue-2);
+            border-radius: 10px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 0.9em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .question-section {
+            padding: 20px;
+            border-radius: 15px;
+            background-color: var(--card-bg);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        .question-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #E0E0E0;
+        }
+        
+        .question-item:last-child {
+            border-bottom: none;
+        }
+
+        .question-item h3 {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .answer-input-container {
+            display: flex;
+            align-items: center;
+            width: 50%;
+            min-width: 150px;
+        }
+
+        .answer-input {
+            flex-grow: 1;
+            border: none;
+            border-bottom: 2px solid var(--light-blue-3);
+            background-color: transparent;
+            outline: none;
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 2px 0;
+            text-align: right;
+            margin-left: 10px;
+            transition: border-color 0.3s;
+        }
+        
+        .correct {
+            border-color: var(--correct-color) !important;
+            background-color: #E8F5E9 !important;
+            color: #2E7D32;
+        }
+        .correct + .feedback-icon::before {
+            content: "✅";
+        }
+        
+        .incorrect {
+            border-color: var(--incorrect-color) !important;
+            background-color: #FFEBEE !important;
+            color: #C62828;
+        }
+        .incorrect + .feedback-icon::before {
+            content: "❌";
+        }
+        
+        .feedback-icon {
+            margin-left: 8px;
+            font-size: 1.2rem;
+            transition: opacity 0.3s;
+            opacity: 0;
+        }
+
+        .correct + .feedback-icon, .incorrect + .feedback-icon {
+            opacity: 1;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-top: 25px;
+            color: var(--secondary-color);
+        }
+
+        .score-display span {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .button-container button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .check-button { background-color: var(--secondary-color); color: white; }
+        .save-button { background-color: var(--primary-color); color: white; }
+
+        .check-button:hover { background-color: #2196F3; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
+        .save-button:hover { background-color: #1565C0; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
+
+        #image-output {
+            max-width: 100%;
+            margin-top: 30px;
+        }
+
+        .output-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" id="worksheet">
+    <div class="header">
+        <h1>🎵 ใบงานที่ ๓.๓ 🎵</h1>
+        <p>เรื่อง: บทเพลงไทยแต่ละชนิด</p>
+    </div>
+
+    <div class="info">
+        <span><label>ชื่อ-สกุล:</label> <input type="text" id="student-name" placeholder="(เช่น เด็กหญิงมานะ รักเรียน)"></span>
+        <span><label>ชั้น:</label> <input type="text" id="student-class" placeholder="(เช่น ม.1/1)"></span>
+        <span><label>เลขที่:</label> <input type="text" id="student-number" placeholder="(เช่น 12)"></span>
+    </div>
+
+    <div class="instructions">
+        <p><strong>คำชี้แจง:</strong> ให้นักเรียนพิมพ์ชื่อชนิดเพลงที่สัมพันธ์กับชื่อเพลงที่กำหนดให้</p>
+        <p style="font-size: 0.9em; color: #777; margin-top: 5px;">**ตัวชี้วัด:** ศ ๒.๒ ม. ๑/๘</p>
+    </div>
+    
+    <div class="song-types-list">
+        <h3>ประเภทเพลงไทย</h3>
+        <span>เพลงตับ</span>
+        <span>เพลงเถา</span>
+        <span>เพลงโหมโรง</span>
+        <span>เพลงเรื่อง</span>
+        <span>เพลงเกร็ด</span>
+        <span>เพลงหน้าพาทย์</span>
+    </div>
+
+    <div class="question-section">
+        <div class="question-item">
+            <h3>๑. ตับวิวาห์พระสมุทร</h3>
+            <div class="answer-input-container">
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงตับ" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+            </div>
+        </div>
+        <div class="question-item">
+            <h3>๒. เขมรไทรโยค</h3>
+            <div class="answer-input-container">
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเถา" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+            </div>
+        </div>
+        <div class="question-item">
+            <h3>๓. โหมโรงไอยรา</h3>
+            <div class="answer-input-container">
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงโหมโรง" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+            </div>
+        </div>
+        <div class="question-item">
+            <h3>๔. เพลงเรื่องปรบไก่</h3>
+            <div class="answer-input-container">
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเรื่อง" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+            </div>
+        </div>
+        <div class="question-item">
+            <h3>๕. แป๊ะ</h3>
+            <div class="answer-input-container">
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเกร็ด" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+            </div>
+        </div>
+        <div class="question-item">
+            <h3>๖. สาธุการ</h3>
+            <div class="answer-input-container">
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงหน้าพาทย์" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+            </div>
+        </div>
+        <div class="question-item">
+            <h3>๗. ตับนางลอย</h3>
+            <div class="answer-input-container">
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงตับ" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+            </div>
+        </div>
+        <div class="question-item">
+            <h3>๘. ลาวคำหอม</h3>
+            <div class="answer-input-container">
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเถา" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+            </div>
+        </div>
+        <div class="question-item">
+            <h3>๙. โหมโรงมหาราช</h3>
+            <div class="answer-input-container">
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงโหมโรง" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+            </div>
+        </div>
+        <div class="question-item">
+            <h3>๑๐. เพลงเรื่องฉิ่ง</h3>
+            <div class="answer-input-container">
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเรื่อง" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="score-display">
+        คะแนนรวม: <span id="score">0</span> / 10
+    </div>
+
+</div>
+
+<div class="button-container">
+    <button class="check-button" onclick="checkAnswers()">ตรวจคำตอบ 🔍</button>
+    <button class="save-button" onclick="saveAsImage()">บันทึกเป็นรูปภาพ 💾</button>
+</div>
+
+<div id="image-output"></div>
+
+<script>
+    function checkAnswers() {
+        const studentName = document.getElementById('student-name').value.trim();
+        const studentClass = document.getElementById('student-class').value.trim();
+        const studentNumber = document.getElementById('student-number').value.trim();
+
+        if (studentName === '' || studentClass === '' || studentNumber === '') {
+            alert('กรุณากรอก ชื่อ-สกุล ชั้น และเลขที่ ก่อนตรวจคำตอบ');
+            return;
+        }
+
+        const questionItems = document.querySelectorAll('.question-item');
+        let score = 0;
+        
+        questionItems.forEach(item => {
+            const input = item.querySelector('.answer-input');
+            const feedbackIcon = item.querySelector('.feedback-icon');
+            const userAnswer = input.value.trim().toLowerCase().replace(/\s+/g, ' ');
+            const correctAnswer = input.getAttribute('data-correct-answer').trim().toLowerCase().replace(/\s+/g, ' ');
+            
+            // Flexible checking for "เพลง..." or just the type
+            const userIsCorrect = (userAnswer === correctAnswer || userAnswer === correctAnswer.replace('เพลง', ''));
+
+            input.classList.remove('correct', 'incorrect');
+            if (userIsCorrect) {
+                input.classList.add('correct');
+                score++;
+            } else {
+                input.classList.add('incorrect');
+            }
+        });
+        
+        document.getElementById('score').innerText = score;
+    }
+
+    function saveAsImage() {
+        const worksheetElement = document.getElementById('worksheet');
+        
+        // Hide buttons for a clean screenshot
+        document.querySelector('.button-container').style.display = 'none';
+
+        html2canvas(worksheetElement, {
+            scale: window.devicePixelRatio * 2,
+            logging: false,
+            useCORS: true
+        }).then(canvas => {
+            const outputDiv = document.getElementById('image-output');
+            outputDiv.innerHTML = '';
+            const image = new Image();
+            image.src = canvas.toDataURL('image/png');
+            image.className = 'output-image';
+            outputDiv.appendChild(image);
+        }).finally(() => {
+            // Restore buttons after screenshot
+            document.querySelector('.button-container').style.display = 'flex';
+        });
+    }
+</script>
+
+</body>
+</html>
