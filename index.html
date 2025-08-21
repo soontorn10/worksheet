@@ -44,7 +44,6 @@
             box-sizing: border-box;
             margin-bottom: 20px;
             line-height: 1.6;
-            transition: all 0.3s ease-in-out;
         }
         
         .header {
@@ -70,23 +69,24 @@
         
         .info {
             display: flex;
-            flex-direction: row;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 25px;
             font-size: 1rem;
             gap: 20px;
         }
-        
+
         .info span {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             position: relative;
+            min-width: 250px; /* ปรับให้กว้างขึ้นสำหรับมือถือ */
         }
         
         .info label {
-            font-size: 0.9em;
+            font-size: 1.1em; /* ขยายขนาดตัวอักษรให้ใหญ่ขึ้น */
             color: #757575;
             margin-bottom: 5px;
         }
@@ -96,10 +96,10 @@
             border-bottom: 2px solid var(--secondary-color);
             background-color: var(--light-blue-1);
             border-radius: 8px;
-            padding: 10px 12px;
+            padding: 12px; /* เพิ่ม Padding */
             outline: none;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 1.1rem; /* ขยายขนาดตัวอักษรให้ใหญ่ขึ้น */
             width: 100%;
             box-sizing: border-box;
             transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
@@ -161,31 +161,32 @@
 
         .question-item {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-            font-size: 1rem;
-            padding-bottom: 15px;
+            flex-direction: column; /* เรียงคำถามและช่องคำตอบในแนวตั้ง */
+            margin-bottom: 25px;
+            padding-bottom: 20px;
             border-bottom: 1px dashed #E0E0E0;
         }
-        
+
         .question-item:last-child {
             border-bottom: none;
         }
-
+        
         .question-item h3 {
-            font-size: 1.1rem;
+            font-size: 1.2rem; /* ขยายขนาดตัวอักษรคำถาม */
             color: var(--secondary-color);
-            margin: 0;
-            flex-grow: 1;
+            margin-bottom: 10px;
         }
 
         .answer-input-container {
             display: flex;
             align-items: center;
-            width: 50%;
-            min-width: 150px;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .answer-input-container p {
+            white-space: nowrap; /* ไม่ให้คำว่า "คำตอบ" ขึ้นบรรทัดใหม่ */
+            margin-right: 10px;
         }
 
         .answer-input {
@@ -195,10 +196,10 @@
             background-color: transparent;
             outline: none;
             font-family: inherit;
-            font-size: 1rem;
-            padding: 2px 0;
-            text-align: right;
-            margin-left: 10px;
+            font-size: 1.1rem; /* ขยายขนาดตัวอักษรช่องคำตอบ */
+            padding: 5px 0;
+            text-align: left; /* ปรับการจัดเรียงให้ดูดีขึ้นบนมือถือ */
+            margin-left: 0;
             transition: border-color 0.3s;
         }
         
@@ -207,30 +208,13 @@
             background-color: #E8F5E9 !important;
             color: #2E7D32;
         }
-        .correct + .feedback-icon::before {
-            content: "✅";
-        }
         
         .incorrect {
             border-color: var(--incorrect-color) !important;
             background-color: #FFEBEE !important;
             color: #C62828;
         }
-        .incorrect + .feedback-icon::before {
-            content: "❌";
-        }
         
-        .feedback-icon {
-            margin-left: 8px;
-            font-size: 1.2rem;
-            transition: opacity 0.3s;
-            opacity: 0;
-        }
-
-        .correct + .feedback-icon, .incorrect + .feedback-icon {
-            opacity: 1;
-        }
-
         .score-display {
             text-align: center;
             font-size: 1.6rem;
@@ -322,61 +306,61 @@
         <div class="question-item">
             <h3>๑. ตับวิวาห์พระสมุทร</h3>
             <div class="answer-input-container">
-                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงตับ" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงตับ" placeholder="พิมพ์คำตอบ">
             </div>
         </div>
         <div class="question-item">
             <h3>๒. เขมรไทรโยค</h3>
             <div class="answer-input-container">
-                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเถา" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเถา" placeholder="พิมพ์คำตอบ">
             </div>
         </div>
         <div class="question-item">
             <h3>๓. โหมโรงไอยรา</h3>
             <div class="answer-input-container">
-                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงโหมโรง" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงโหมโรง" placeholder="พิมพ์คำตอบ">
             </div>
         </div>
         <div class="question-item">
             <h3>๔. เพลงเรื่องปรบไก่</h3>
             <div class="answer-input-container">
-                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเรื่อง" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเรื่อง" placeholder="พิมพ์คำตอบ">
             </div>
         </div>
         <div class="question-item">
             <h3>๕. แป๊ะ</h3>
             <div class="answer-input-container">
-                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเกร็ด" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเกร็ด" placeholder="พิมพ์คำตอบ">
             </div>
         </div>
         <div class="question-item">
             <h3>๖. สาธุการ</h3>
             <div class="answer-input-container">
-                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงหน้าพาทย์" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงหน้าพาทย์" placeholder="พิมพ์คำตอบ">
             </div>
         </div>
         <div class="question-item">
             <h3>๗. ตับนางลอย</h3>
             <div class="answer-input-container">
-                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงตับ" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงตับ" placeholder="พิมพ์คำตอบ">
             </div>
         </div>
         <div class="question-item">
             <h3>๘. ลาวคำหอม</h3>
             <div class="answer-input-container">
-                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเถา" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเถา" placeholder="พิมพ์คำตอบ">
             </div>
         </div>
         <div class="question-item">
             <h3>๙. โหมโรงมหาราช</h3>
             <div class="answer-input-container">
-                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงโหมโรง" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงโหมโรง" placeholder="พิมพ์คำตอบ">
             </div>
         </div>
         <div class="question-item">
             <h3>๑๐. เพลงเรื่องฉิ่ง</h3>
             <div class="answer-input-container">
-                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเรื่อง" placeholder="พิมพ์คำตอบ"><span class="feedback-icon"></span>
+                <p>คำตอบ: </p><input type="text" class="answer-input" data-correct-answer="เพลงเรื่อง" placeholder="พิมพ์คำตอบ">
             </div>
         </div>
     </div>
@@ -405,12 +389,10 @@
             return;
         }
 
-        const questionItems = document.querySelectorAll('.question-item');
+        const answerInputs = document.querySelectorAll('.answer-input');
         let score = 0;
         
-        questionItems.forEach(item => {
-            const input = item.querySelector('.answer-input');
-            const feedbackIcon = item.querySelector('.feedback-icon');
+        answerInputs.forEach(input => {
             const userAnswer = input.value.trim().toLowerCase().replace(/\s+/g, ' ');
             const correctAnswer = input.getAttribute('data-correct-answer').trim().toLowerCase().replace(/\s+/g, ' ');
             
