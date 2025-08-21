@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-2cale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ใบงานที่ ๓.๓</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
@@ -464,7 +464,6 @@
                 input.classList.add('incorrect');
             }
 
-            // Generate summary table rows
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${index + 1}</td>
@@ -487,7 +486,7 @@
         document.querySelector('.button-container').style.display = 'none';
 
         html2canvas(summaryElement, {
-            scale: window.devicePixelRatio * 2,
+            scale: 2, // เพิ่มค่า scale เพื่อคุณภาพที่ดีขึ้น
             logging: false,
             useCORS: true
         }).then(canvas => {
