@@ -330,6 +330,29 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
+
+        /* NEW: Styles for the print/image-ready version */
+        .printable-summary {
+            padding: 20px;
+            background-color: var(--card-color);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .printable-summary .summary-title, .printable-summary .summary-info, .printable-summary .score-display {
+            margin-bottom: 15px;
+        }
+        .printable-summary .summary-table {
+            margin-top: 15px;
+        }
+        .printable-summary .summary-table th, .printable-summary .summary-table td {
+            padding: 8px; /* Compact padding */
+            font-size: 0.9rem; /* Smaller font for better fit */
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -436,10 +459,12 @@
 </div>
 
 <div class="container hidden" id="page-3">
-    <div class="summary-container" id="summary-section">
-        <div class="summary-header">สรุปผลการทำใบงาน</div>
-        <div class="summary-title" id="summary-title"></div>
-        <div class="summary-info" id="summary-student-info"></div>
+    <div class="summary-container printable-summary" id="printable-summary-section">
+        <div class="header">
+            <h1>สรุปผลการทำใบงาน</h1>
+            <p>ใบงานที่ ๓.๓ เรื่อง: บทเพลงไทยแต่ละชนิด</p>
+        </div>
+        <div class="info" id="summary-student-info"></div>
         <div class="score-display">
             คะแนนรวม: <span id="score">0</span> / 10
         </div>
@@ -528,26 +553,34 @@
             }
 
             const row = document.createElement('tr');
-            const resultEmoji = userIsCorrect ? '✅ ถูกต้อง' : '❌ ผิดพลาด';
+            const resultEmoji = userIsCorrect ? '✅' : '❌';
+            const resultText = userIsCorrect ? 'ถูกต้อง' : 'ผิดพลาด';
+
             row.innerHTML = `
                 <td>${index + 1}</td>
                 <td>${questions[index]}</td>
                 <td>${input.value}</td>
-                <td>${resultEmoji}</td>
+                <td>${resultEmoji} ${resultText}</td>
             `;
             summaryTableBody.appendChild(row);
         });
         
+        // Update summary info for the printable view
+        const summaryInfoDiv = document.getElementById('summary-student-info');
+        summaryInfoDiv.innerHTML = `
+            <span><label>ชื่อ-สกุล:</label> ${studentName}</span>
+            <span><label>ชั้น:</label> ${studentClass}</span>
+            <span><label>เลขที่:</label> ${studentNumber}</span>
+        `;
+
         document.getElementById('score').innerText = score;
-        document.getElementById('summary-title').innerText = 'ใบงานที่ ๓.๓ เรื่อง: บทเพลงไทยแต่ละชนิด';
-        document.getElementById('summary-student-info').innerText = `ชื่อ: ${studentName} | ชั้น: ${studentClass} | เลขที่: ${studentNumber}`;
     }
 
     function saveAsImage() {
-        const summaryElement = document.getElementById('summary-section');
+        const summaryElement = document.getElementById('printable-summary-section');
         
         html2canvas(summaryElement, {
-            scale: 2,
+            scale: 2, // You can adjust this value
             logging: false,
             useCORS: true
         }).then(canvas => {
@@ -559,7 +592,8 @@
             outputDiv.appendChild(image);
             
             const link = document.createElement('a');
-            link.download = `สรุปผลใบงานที่-3-3-${document.getElementById('student-name').value.trim()}.png`;
+            const studentName = document.getElementById('student-name').value.trim();
+            link.download = `สรุปผลใบงานที่-3-3-${studentName}.png`;
             link.href = canvas.toDataURL('image/png');
             document.body.appendChild(link);
             link.click();
