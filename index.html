@@ -28,15 +28,15 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            padding: 20px;
+            padding: 10px; /* ปรับลด padding สำหรับมือถือ */
             margin: 0;
             min-height: 100vh;
         }
         
         .container {
             width: 95%;
-            max-width: 1000px; /* แก้ไขค่าตรงนี้เป็น 1000px */
-            padding: 50px; /* แก้ไขค่าตรงนี้เป็น 50px */
+            max-width: 700px;
+            padding: 20px; /* ปรับลด padding สำหรับมือถือ */
             background-color: var(--card-color);
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -53,14 +53,14 @@
         }
         
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 2rem; /* ลดขนาดหัวข้อสำหรับมือถือ */
             color: var(--primary-color);
             margin: 0;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
         
         .header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem; /* ลดขนาดตัวอักษร */
             color: var(--text-color);
             margin-top: 5px;
             font-weight: bold;
@@ -72,7 +72,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 25px;
-            font-size: 1rem;
+            font-size: 0.9rem; /* ลดขนาดฟอนต์ */
             gap: 20px;
         }
 
@@ -81,11 +81,11 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            min-width: 250px;
+            min-width: 150px; /* ลด min-width เพื่อให้แสดงผลได้ดีขึ้นบนจอเล็ก */
         }
         
         .info label {
-            font-size: 1.1em;
+            font-size: 1em;
             color: #777777;
             margin-bottom: 5px;
         }
@@ -95,10 +95,10 @@
             border-bottom: 3px solid var(--primary-color);
             background-color: var(--background-color);
             border-radius: 10px;
-            padding: 12px;
+            padding: 10px; /* ลด padding */
             outline: none;
             font-family: inherit;
-            font-size: 1.1rem;
+            font-size: 1rem; /* ลดขนาดฟอนต์ */
             width: 100%;
             box-sizing: border-box;
             transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
@@ -111,12 +111,12 @@
         }
 
         .instructions {
-            padding: 20px;
+            padding: 15px; /* ลด padding */
             background-color: var(--secondary-color);
             border-left: 5px solid var(--primary-color);
             border-radius: 12px;
-            margin-bottom: 30px;
-            font-size: 1rem;
+            margin-bottom: 20px; /* ลด margin */
+            font-size: 0.9rem; /* ลดขนาดฟอนต์ */
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             color: white;
         }
@@ -126,51 +126,59 @@
         }
 
         .song-types-list {
-            padding: 25px;
+            padding: 15px; /* ลด padding */
             background-color: var(--background-color);
             border: 1px dashed var(--secondary-color);
             border-radius: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 20px; /* ลด margin */
             text-align: center;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(2, 1fr); /* ปรับเป็น 2 คอลัมน์สำหรับมือถือ */
+            gap: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        @media (min-width: 600px) {
+            .song-types-list {
+                grid-template-columns: repeat(3, 1fr); /* กลับไปใช้ 3 คอลัมน์บนจอใหญ่ */
+            }
         }
         
         .song-types-list h3 {
             grid-column: 1 / -1;
             margin: 0;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--primary-color);
         }
         
         .song-types-list span {
             display: block;
-            padding: 12px;
+            padding: 10px;
             background: var(--light-blue-2);
             border-radius: 10px;
             font-weight: bold;
             color: var(--primary-color);
-            font-size: 0.9em;
+            font-size: 0.8em;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .worksheet-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 1rem;
+            font-size: 0.9rem; /* ลดขนาดฟอนต์ */
             text-align: left;
             border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            overflow-x: auto; /* เพิ่มให้เลื่อนดูได้แนวนอน */
         }
         
         .worksheet-table th, .worksheet-table td {
-            padding: 12px;
+            padding: 8px; /* ลด padding */
             border: 1px solid #E0E0E0;
             vertical-align: top;
+            white-space: nowrap; /* ป้องกันข้อความในตารางไม่ให้ขึ้นบรรทัดใหม่ */
         }
 
         .worksheet-table th {
@@ -193,7 +201,7 @@
             border: 1px solid var(--secondary-color);
             border-radius: 5px;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.9rem; /* ลดขนาดฟอนต์ */
             outline: none;
             box-sizing: border-box;
             transition: border-color 0.3s;
@@ -218,17 +226,17 @@
         
         .button-container {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 20px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
         }
         
         .button-container button {
-            padding: 15px 30px;
+            padding: 12px 20px; /* ลดขนาดปุ่ม */
             border: none;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1rem; /* ลดขนาดฟอนต์ */
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -252,69 +260,57 @@
         .flex { display: flex; }
 
         .summary-container {
-            padding: 20px;
+            padding: 15px; /* ลด padding */
             background-color: var(--background-color);
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px; /* ลด margin */
         }
         
         .summary-header {
-            font-size: 1.5rem;
+            font-size: 1.3rem; /* ลดขนาดฟอนต์ */
             font-weight: bold;
             color: var(--primary-color);
             margin-bottom: 10px;
         }
         
         .summary-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem; /* ลดขนาดฟอนต์ */
             font-weight: bold;
             color: var(--primary-color);
             margin-bottom: 10px;
         }
 
         .summary-info {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+            font-size: 1rem; /* ลดขนาดฟอนต์ */
+            margin-bottom: 15px;
             color: var(--text-color);
         }
         
         .printable-summary {
-            padding: 20px;
+            padding: 15px; /* ลด padding */
             background-color: var(--card-color);
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
             text-align: center;
             width: 100%;
-            max-width: 900px; /* ลดค่านี้ลงเล็กน้อยจากหน้าหลัก เพื่อให้ภาพที่บันทึกมีขนาดเหมาะสม */
+            max-width: 600px;
             margin: 0 auto;
         }
         
         .printable-summary .summary-title, .printable-summary .summary-info, .printable-summary .score-display {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
         .printable-summary .summary-table {
-            margin-top: 15px;
+            margin-top: 10px;
         }
         
         .printable-summary .summary-table th, .printable-summary .summary-table td {
-            padding: 8px;
-            font-size: 0.9rem;
-        }
-        
-        .printable-info {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            margin-bottom: 20px;
-        }
-        
-        .printable-info span {
-            display: block;
-            text-align: center;
+            padding: 6px; /* ลด padding */
+            font-size: 0.8rem; /* ลดขนาดฟอนต์ */
         }
         
         .summary-info-wrapper {
@@ -322,33 +318,35 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .summary-info-item {
             display: flex;
             align-items: center;
             gap: 5px;
+            flex-wrap: nowrap; /* ป้องกันการขึ้นบรรทัดใหม่ */
         }
         
         .summary-info-item label {
             font-weight: bold;
             color: var(--text-color);
-            font-size: 1.1em;
+            font-size: 1em;
         }
 
         .summary-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 1rem;
+            font-size: 0.9rem; /* ลดขนาดฟอนต์ */
             text-align: left;
-            margin-top: 15px;
+            margin-top: 10px;
             border-radius: 10px;
             overflow: hidden;
+            overflow-x: auto; /* เพิ่มให้เลื่อนดูได้แนวนอน */
         }
 
         .summary-table th, .summary-table td {
-            padding: 12px;
+            padding: 10px;
             border: 1px solid #E0E0E0;
         }
         
@@ -368,20 +366,20 @@
 
         .score-display {
             text-align: center;
-            font-size: 1.6rem;
+            font-size: 1.4rem; /* ลดขนาดฟอนต์ */
             font-weight: bold;
-            margin-top: 25px;
+            margin-top: 20px;
             color: var(--primary-color);
         }
 
         .score-display span {
-            font-size: 2.2rem;
+            font-size: 2rem; /* ลดขนาดฟอนต์ */
             color: var(--accent-color);
         }
         
         #image-output {
             max-width: 100%;
-            margin-top: 30px;
+            margin-top: 20px;
             text-align: center;
         }
 
