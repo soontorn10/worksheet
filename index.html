@@ -1,1303 +1,652 @@
 <!DOCTYPE html>
-
 <html lang="th">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <title>ใบงานที่ ๓.๓</title>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <style>
-
-        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
-
-        
-
-        :root {
-
-            --primary-color: #4CAF50; /* Green */
-
-            --secondary-color: #8BC34A; /* Light Green */
-
-            --background-color: #F1F8E9; /* Very Light Green */
-
-            --card-color: #FFFFFF;
-
-            --text-color: #333333;
-
-            --accent-color: #43A047; /* Darker Green */
-
-            --correct-color: #2E7D32; /* Dark Green */
-
-            --incorrect-color: #D32F2F; /* Red */
-
-        }
-
-
-
-        body {
-
-            font-family: 'Sarabun', sans-serif;
-
-            background-color: var(--background-color);
-
-            color: var(--text-color);
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            flex-direction: column;
-
-            padding: 20px;
-
-            margin: 0;
-
-            min-height: 100vh;
-
-        }
-
-        
-
-        .container {
-
-            width: 95%;
-
-            max-width: 700px;
-
-            padding: 30px;
-
-            background-color: var(--card-color);
-
-            border-radius: 20px;
-
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-
-            box-sizing: border-box;
-
-            line-height: 1.6;
-
-            transition: all 0.5s ease-in-out;
-
-        }
-
-
-
-        .header {
-
-            text-align: center;
-
-            padding-bottom: 10px;
-
-            border-bottom: 3px solid var(--secondary-color);
-
-            margin-bottom: 25px;
-
-        }
-
-        
-
-        .header h1 {
-
-            font-size: 2.5rem;
-
-            color: var(--primary-color);
-
-            margin: 0;
-
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-
-        }
-
-        
-
-        .header p {
-
-            font-size: 1.2rem;
-
-            color: var(--text-color);
-
-            margin-top: 5px;
-
-            font-weight: bold;
-
-        }
-
-        
-
-        .info {
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            margin-bottom: 25px;
-
-            font-size: 1rem;
-
-            gap: 20px;
-
-        }
-
-
-
-        .info span {
-
-            flex-grow: 1;
-
-            display: flex;
-
-            flex-direction: column;
-
-            position: relative;
-
-            min-width: 250px;
-
-        }
-
-        
-
-        .info label {
-
-            font-size: 1.1em;
-
-            color: #777777;
-
-            margin-bottom: 5px;
-
-        }
-
-
-
-        .info input {
-
-            border: 1px solid var(--secondary-color);
-
-            border-bottom: 3px solid var(--primary-color);
-
-            background-color: var(--background-color);
-
-            border-radius: 10px;
-
-            padding: 12px;
-
-            outline: none;
-
-            font-family: inherit;
-
-            font-size: 1.1rem;
-
-            width: 100%;
-
-            box-sizing: border-box;
-
-            transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
-
-        }
-
-        
-
-        .info input:focus {
-
-            border-color: var(--accent-color);
-
-            box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
-
-            background-color: #E8F5E9;
-
-        }
-
-
-
-        .instructions {
-
-            padding: 20px;
-
-            background-color: var(--secondary-color);
-
-            border-left: 5px solid var(--primary-color);
-
-            border-radius: 12px;
-
-            margin-bottom: 30px;
-
-            font-size: 1rem;
-
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-
-            color: white;
-
-        }
-
-        
-
-        .instructions strong, .instructions p {
-
-            color: white;
-
-        }
-
-
-
-        .song-types-list {
-
-            padding: 25px;
-
-            background-color: var(--background-color);
-
-            border: 1px dashed var(--secondary-color);
-
-            border-radius: 15px;
-
-            margin-bottom: 30px;
-
-            text-align: center;
-
-            display: grid;
-
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 15px;
-
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-
-        }
-
-        
-
-        .song-types-list h3 {
-
-            grid-column: 1 / -1;
-
-            margin: 0;
-
-            font-size: 1.2rem;
-
-            color: var(--primary-color);
-
-        }
-
-        
-
-        .song-types-list span {
-
-            display: block;
-
-            padding: 12px;
-
-            background: var(--light-blue-2);
-
-            border-radius: 10px;
-
-            font-weight: bold;
-
-            color: var(--primary-color);
-
-            font-size: 0.9em;
-
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-
-        }
-
-        
-
-        .worksheet-table {
-
-            width: 100%;
-
-            border-collapse: collapse;
-
-            font-size: 1rem;
-
-            text-align: left;
-
-            border-radius: 10px;
-
-            overflow: hidden;
-
-            margin-bottom: 20px;
-
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-
-        }
-
-        
-
-        .worksheet-table th, .worksheet-table td {
-
-            padding: 12px;
-
-            border: 1px solid #E0E0E0;
-
-            vertical-align: top;
-
-        }
-
-
-
-        .worksheet-table th {
-
-            background-color: var(--secondary-color);
-
-            color: white;
-
-            font-weight: bold;
-
-        }
-
-
-
-        .worksheet-table tr:nth-child(even) {
-
-            background-color: #F9FBE7;
-
-        }
-
-
-
-        .worksheet-table tr:hover {
-
-            background-color: #F1F8E9;
-
-        }
-
-        
-
-        .answer-input {
-
-            width: 100%;
-
-            padding: 8px;
-
-            border: 1px solid var(--secondary-color);
-
-            border-radius: 5px;
-
-            font-family: inherit;
-
-            font-size: 1rem;
-
-            outline: none;
-
-            box-sizing: border-box;
-
-            transition: border-color 0.3s;
-
-        }
-
-
-
-        .answer-input:focus {
-
-            border-color: var(--primary-color);
-
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
-
-        }
-
-
-
-        .correct {
-
-            border-color: var(--correct-color) !important;
-
-            background-color: #E8F5E9 !important;
-
-            color: #2E7D32;
-
-        }
-
-        
-
-        .incorrect {
-
-            border-color: var(--incorrect-color) !important;
-
-            background-color: #FFEBEE !important;
-
-            color: #C62828;
-
-        }
-
-        
-
-        .button-container {
-
-            text-align: center;
-
-            margin-top: 30px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 15px;
-
-        }
-
-        
-
-        .button-container button {
-
-            padding: 15px 30px;
-
-            border: none;
-
-            border-radius: 50px;
-
-            font-size: 1.2rem;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-
-            transition: all 0.3s ease-in-out;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 10px;
-
-        }
-
-
-
-        .check-button, .next-button { background-color: var(--primary-color); color: white; }
-
-        .back-button { background-color: #9E9E9E; color: white; }
-
-        .save-button { background-color: var(--accent-color); color: white; }
-
-
-
-        .check-button:hover, .next-button:hover { background-color: var(--secondary-color); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
-
-        .back-button:hover { background-color: #757575; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
-
-        .save-button:hover { background-color: #388E3C; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
-
-
-
-        .hidden { display: none; }
-
-        .visible { display: block; }
-
-        .flex { display: flex; }
-
-
-
-        .summary-container {
-
-            padding: 20px;
-
-            background-color: var(--background-color);
-
-            border-radius: 15px;
-
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-
-            text-align: center;
-
-            margin-top: 20px;
-
-        }
-
-        
-
-        .summary-header {
-
-            font-size: 1.5rem;
-
-            font-weight: bold;
-
-            color: var(--primary-color);
-
-            margin-bottom: 10px;
-
-        }
-
-        
-
-        .summary-title {
-
-            font-size: 1.2rem;
-
-            font-weight: bold;
-
-            color: var(--primary-color);
-
-            margin-bottom: 10px;
-
-        }
-
-
-
-        .summary-info {
-
-            font-size: 1.1rem;
-
-            margin-bottom: 20px;
-
-            color: var(--text-color);
-
-        }
-
-        /* NEW: Styles for the print/image-ready version */
-
-        .printable-summary {
-
-            padding: 20px;
-
-            background-color: var(--card-color);
-
-            border-radius: 15px;
-
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-
-            box-sizing: border-box;
-
-            text-align: center;
-
-            width: 100%;
-
-            max-width: 600px;
-
-            margin: 0 auto;
-
-        }
-
-        .printable-summary .summary-title, .printable-summary .summary-info, .printable-summary .score-display {
-
-            margin-bottom: 15px;
-
-        }
-
-        .printable-summary .summary-table {
-
-            margin-top: 15px;
-
-        }
-
-        .printable-summary .summary-table th, .printable-summary .summary-table td {
-
-            padding: 8px; /* Compact padding */
-
-            font-size: 0.9rem; /* Smaller font for better fit */
-
-        }
-
-        .printable-info {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 5px;
-
-            margin-bottom: 20px;
-
-        }
-
-        .printable-info span {
-
-            display: block;
-
-            text-align: center;
-
-        }
-
-        /* Fix for mobile view */
-
-        .summary-info-wrapper {
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            justify-content: center;
-
-            gap: 10px;
-
-            margin-bottom: 20px;
-
-        }
-
-        .summary-info-item {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 5px;
-
-        }
-
-        .summary-info-item label {
-
-            font-weight: bold;
-
-            color: var(--text-color);
-
-            font-size: 1.1em;
-
-        }
-
-
-
-        .summary-table {
-
-            width: 100%;
-
-            border-collapse: collapse;
-
-            font-size: 1rem;
-
-            text-align: left;
-
-            margin-top: 15px;
-
-            border-radius: 10px;
-
-            overflow: hidden;
-
-        }
-
-
-
-        .summary-table th, .summary-table td {
-
-            padding: 12px;
-
-            border: 1px solid #E0E0E0;
-
-        }
-
-        
-
-        .summary-table th {
-
-            background-color: var(--secondary-color);
-
-            color: white;
-
-            font-weight: bold;
-
-        }
-
-
-
-        .summary-table tr:nth-child(even) {
-
-            background-color: #F9FBE7;
-
-        }
-
-        
-
-        .summary-table tr:hover {
-
-            background-color: #F1F8E9;
-
-        }
-
-
-
-        .score-display {
-
-            text-align: center;
-
-            font-size: 1.6rem;
-
-            font-weight: bold;
-
-            margin-top: 25px;
-
-            color: var(--primary-color);
-
-        }
-
-
-
-        .score-display span {
-
-            font-size: 2.2rem;
-
-            color: var(--accent-color);
-
-        }
-
-        
-
-        #image-output {
-
-            max-width: 100%;
-
-            margin-top: 30px;
-
-            text-align: center;
-
-        }
-
-
-
-        .output-image {
-
-            max-width: 100%;
-
-            height: auto;
-
-            border: 1px solid #ccc;
-
-            border-radius: 10px;
-
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-
-        }
-
-
-
-        /* เพิ่มสไตล์สำหรับตอนที่จะบันทึกภาพโดยเฉพาะ */
-
-        .ready-for-capture {
-
-            width: 1000px !important;
-
-            padding: 50px !important;
-
-            box-shadow: none !important;
-
-        }
-
-    </style>
-
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ใบงานที่ ๓.๓</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
+        
+        :root {
+            --primary-color: #4CAF50; /* Green */
+            --secondary-color: #8BC34A; /* Light Green */
+            --background-color: #F1F8E9; /* Very Light Green */
+            --card-color: #FFFFFF;
+            --text-color: #333333;
+            --accent-color: #43A047; /* Darker Green */
+            --correct-color: #2E7D32; /* Dark Green */
+            --incorrect-color: #D32F2F; /* Red */
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 700px;
+            padding: 30px;
+            background-color: var(--card-color);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            line-height: 1.6;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary-color);
+            margin-bottom: 25px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin: 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        
+        .info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 1rem;
+            gap: 20px;
+        }
+
+        .info span {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-width: 250px;
+        }
+        
+        .info label {
+            font-size: 1.1em;
+            color: #777777;
+            margin-bottom: 5px;
+        }
+
+        .info input {
+            border: 1px solid var(--secondary-color);
+            border-bottom: 3px solid var(--primary-color);
+            background-color: var(--background-color);
+            border-radius: 10px;
+            padding: 12px;
+            outline: none;
+            font-family: inherit;
+            font-size: 1.1rem;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+        }
+        
+        .info input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+            background-color: #E8F5E9;
+        }
+
+        .instructions {
+            padding: 20px;
+            background-color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            color: white;
+        }
+        
+        .instructions strong, .instructions p {
+            color: white;
+        }
+
+        .song-types-list {
+            padding: 25px;
+            background-color: var(--background-color);
+            border: 1px dashed var(--secondary-color);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .song-types-list h3 {
+            grid-column: 1 / -1;
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+        
+        .song-types-list span {
+            display: block;
+            padding: 12px;
+            background: var(--light-blue-2);
+            border-radius: 10px;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 0.9em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .worksheet-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1rem;
+            text-align: left;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        .worksheet-table th, .worksheet-table td {
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            vertical-align: top;
+        }
+
+        .worksheet-table th {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        .worksheet-table tr:nth-child(even) {
+            background-color: #F9FBE7;
+        }
+
+        .worksheet-table tr:hover {
+            background-color: #F1F8E9;
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .answer-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+        }
+
+        .correct {
+            border-color: var(--correct-color) !important;
+            background-color: #E8F5E9 !important;
+            color: #2E7D32;
+        }
+        
+        .incorrect {
+            border-color: var(--incorrect-color) !important;
+            background-color: #FFEBEE !important;
+            color: #C62828;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .button-container button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .check-button, .next-button { background-color: var(--primary-color); color: white; }
+        .back-button { background-color: #9E9E9E; color: white; }
+        .save-button { background-color: var(--accent-color); color: white; }
+
+        .check-button:hover, .next-button:hover { background-color: var(--secondary-color); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
+        .back-button:hover { background-color: #757575; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
+        .save-button:hover { background-color: #388E3C; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
+
+        .hidden { display: none; }
+        .visible { display: block; }
+        .flex { display: flex; }
+
+        .summary-container {
+            padding: 20px;
+            background-color: var(--background-color);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .summary-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .summary-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .summary-info {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        /* NEW: Styles for the print/image-ready version */
+        .printable-summary {
+            padding: 20px;
+            background-color: var(--card-color);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .printable-summary .summary-title, .printable-summary .summary-info, .printable-summary .score-display {
+            margin-bottom: 15px;
+        }
+        .printable-summary .summary-table {
+            margin-top: 15px;
+        }
+        .printable-summary .summary-table th, .printable-summary .summary-table td {
+            padding: 8px; /* Compact padding */
+            font-size: 0.9rem; /* Smaller font for better fit */
+        }
+        .printable-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        .printable-info span {
+            display: block;
+            text-align: center;
+        }
+        /* Fix for mobile view */
+        .summary-info-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .summary-info-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .summary-info-item label {
+            font-weight: bold;
+            color: var(--text-color);
+            font-size: 1.1em;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1rem;
+            text-align: left;
+            margin-top: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .summary-table th, .summary-table td {
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+        }
+        
+        .summary-table th {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        .summary-table tr:nth-child(even) {
+            background-color: #F9FBE7;
+        }
+        
+        .summary-table tr:hover {
+            background-color: #F1F8E9;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-top: 25px;
+            color: var(--primary-color);
+        }
+
+        .score-display span {
+            font-size: 2.2rem;
+            color: var(--accent-color);
+        }
+        
+        #image-output {
+            max-width: 100%;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .output-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* เพิ่มสไตล์สำหรับตอนที่จะบันทึกภาพโดยเฉพาะ */
+        .ready-for-capture {
+            width: 1000px !important;
+            padding: 50px !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-
-
 <div class="container" id="page-1">
-
-    <div class="header">
-
-        <h1>🎵 ใบงานที่ ๓.๓ 🎵</h1>
-
-        <p>ข้อมูลนักเรียน</p>
-
-    </div>
-
-    <div class="info">
-
-        <span><label>ชื่อ-สกุล:</label> <input type="text" id="student-name" placeholder="(เช่น เด็กหญิงมานะ รักเรียน)"></span>
-
-        <span><label>ชั้น:</label> <input type="text" id="student-class" placeholder="(เช่น ม.1/1)"></span>
-
-        <span><label>เลขที่:</label> <input type="text" id="student-number" placeholder="(เช่น 12)"></span>
-
-    </div>
-
-    <div class="button-container">
-
-        <button class="next-button" onclick="goToPage(2)"><i class="fas fa-arrow-right"></i> ถัดไป</button>
-
-    </div>
-
+    <div class="header">
+        <h1>🎵 ใบงานที่ ๓.๓ 🎵</h1>
+        <p>ข้อมูลนักเรียน</p>
+    </div>
+    <div class="info">
+        <span><label>ชื่อ-สกุล:</label> <input type="text" id="student-name" placeholder="(เช่น เด็กหญิงมานะ รักเรียน)"></span>
+        <span><label>ชั้น:</label> <input type="text" id="student-class" placeholder="(เช่น ม.1/1)"></span>
+        <span><label>เลขที่:</label> <input type="text" id="student-number" placeholder="(เช่น 12)"></span>
+    </div>
+    <div class="button-container">
+        <button class="next-button" onclick="goToPage(2)"><i class="fas fa-arrow-right"></i> ถัดไป</button>
+    </div>
 </div>
-
-
 
 <div class="container hidden" id="page-2">
-
-    <div class="header">
-
-        <h1>🎵 ใบงานที่ ๓.๓ 🎵</h1>
-
-        <p>เรื่อง: บทเพลงไทยแต่ละชนิด</p>
-
-    </div>
-
-    <div class="instructions">
-
-        <p><strong>คำชี้แจง:</strong> ให้นักเรียนพิมพ์ชื่อชนิดเพลงที่สัมพันธ์กับชื่อเพลงที่กำหนดให้</p>
-
-        <p style="font-size: 0.9em; color: #777; margin-top: 5px;">**ตัวชี้วัด:** ศ ๒.๒ ม. ๑/๘</p>
-
-    </div>
-
-    <div class="song-types-list">
-
-        <h3>ประเภทเพลงไทย</h3>
-
-        <span>เพลงตับ</span>
-
-        <span>เพลงเถา</span>
-
-        <span>เพลงโหมโรง</span>
-
-        <span>เพลงเรื่อง</span>
-
-        <span>เพลงเกร็ด</span>
-
-        <span>เพลงหน้าพาทย์</span>
-
-    </div>
-
-    <table class="worksheet-table">
-
-        <thead>
-
-            <tr>
-
-                <th>ข้อ</th>
-
-                <th>คำถาม</th>
-
-                <th>คำตอบ</th>
-
-            </tr>
-
-        </thead>
-
-        <tbody>
-
-            <tr>
-
-                <td>๑.</td>
-
-                <td>ตับวิวาห์พระสมุทร</td>
-
-                <td><input type="text" class="answer-input" data-correct-answer="เพลงตับ" placeholder="พิมพ์คำตอบ"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>๒.</td>
-
-                <td>เขมรไทรโยค</td>
-
-                <td><input type="text" class="answer-input" data-correct-answer="เพลงเถา" placeholder="พิมพ์คำตอบ"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>๓.</td>
-
-                <td>โหมโรงไอยเรศ</td>
-
-                <td><input type="text" class="answer-input" data-correct-answer="เพลงโหมโรง" placeholder="พิมพ์คำตอบ"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>๔.</td>
-
-                <td>เพลงเรื่องปรบไก่</td>
-
-                <td><input type="text" class="answer-input" data-correct-answer="เพลงเรื่อง" placeholder="พิมพ์คำตอบ"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>๕.</td>
-
-                <td>แป๊ะ</td>
-
-                <td><input type="text" class="answer-input" data-correct-answer="เพลงเกร็ด" placeholder="พิมพ์คำตอบ"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>๖.</td>
-
-                <td>สาธุการ</td>
-
-                <td><input type="text" class="answer-input" data-correct-answer="เพลงหน้าพาทย์" placeholder="พิมพ์คำตอบ"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>๗.</td>
-
-                <td>ตับนางลอย</td>
-
-                <td><input type="text" class="answer-input" data-correct-answer="เพลงตับ" placeholder="พิมพ์คำตอบ"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>๘.</td>
-
-                <td>ลาวคำหอม</td>
-
-                <td><input type="text" class="answer-input" data-correct-answer="เพลงเถา" placeholder="พิมพ์คำตอบ"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>๙.</td>
-
-                <td>โหมโรงมหาราช</td>
-
-                <td><input type="text" class="answer-input" data-correct-answer="เพลงโหมโรง" placeholder="พิมพ์คำตอบ"></td>
-
-            </tr>
-
-            <tr>
-
-                <td>๑๐.</td>
-
-                <td>เพลงเรื่องฉิ่ง</td>
-
-                <td><input type="text" class="answer-input" data-correct-answer="เพลงเรื่อง" placeholder="พิมพ์คำตอบ"></td>
-
-            </tr>
-
-        </tbody>
-
-    </table>
-
-    <div class="button-container flex">
-
-        <button class="back-button" onclick="goToPage(1)"><i class="fas fa-arrow-left"></i> ย้อนกลับ</button>
-
-        <button class="check-button" onclick="goToPage(3)">ตรวจคำตอบ <i class="fas fa-check-circle"></i></button>
-
-    </div>
-
+    <div class="header">
+        <h1>🎵 ใบงานที่ ๓.๓ 🎵</h1>
+        <p>เรื่อง: บทเพลงไทยแต่ละชนิด</p>
+    </div>
+    <div class="instructions">
+        <p><strong>คำชี้แจง:</strong> ให้นักเรียนพิมพ์ชื่อชนิดเพลงที่สัมพันธ์กับชื่อเพลงที่กำหนดให้</p>
+        <p style="font-size: 0.9em; color: #777; margin-top: 5px;">**ตัวชี้วัด:** ศ ๒.๒ ม. ๑/๘</p>
+    </div>
+    <div class="song-types-list">
+        <h3>ประเภทเพลงไทย</h3>
+        <span>เพลงตับ</span>
+        <span>เพลงเถา</span>
+        <span>เพลงโหมโรง</span>
+        <span>เพลงเรื่อง</span>
+        <span>เพลงเกร็ด</span>
+        <span>เพลงหน้าพาทย์</span>
+    </div>
+    <table class="worksheet-table">
+        <thead>
+            <tr>
+                <th>ข้อ</th>
+                <th>คำถาม</th>
+                <th>คำตอบ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>๑.</td>
+                <td>ตับวิวาห์พระสมุทร</td>
+                <td><input type="text" class="answer-input" data-correct-answer="เพลงตับ" placeholder="พิมพ์คำตอบ"></td>
+            </tr>
+            <tr>
+                <td>๒.</td>
+                <td>เขมรไทรโยค</td>
+                <td><input type="text" class="answer-input" data-correct-answer="เพลงเถา" placeholder="พิมพ์คำตอบ"></td>
+            </tr>
+            <tr>
+                <td>๓.</td>
+                <td>โหมโรงไอยเรศ</td>
+                <td><input type="text" class="answer-input" data-correct-answer="เพลงโหมโรง" placeholder="พิมพ์คำตอบ"></td>
+            </tr>
+            <tr>
+                <td>๔.</td>
+                <td>เพลงเรื่องปรบไก่</td>
+                <td><input type="text" class="answer-input" data-correct-answer="เพลงเรื่อง" placeholder="พิมพ์คำตอบ"></td>
+            </tr>
+            <tr>
+                <td>๕.</td>
+                <td>แป๊ะ</td>
+                <td><input type="text" class="answer-input" data-correct-answer="เพลงเกร็ด" placeholder="พิมพ์คำตอบ"></td>
+            </tr>
+            <tr>
+                <td>๖.</td>
+                <td>สาธุการ</td>
+                <td><input type="text" class="answer-input" data-correct-answer="เพลงหน้าพาทย์" placeholder="พิมพ์คำตอบ"></td>
+            </tr>
+            <tr>
+                <td>๗.</td>
+                <td>ตับนางลอย</td>
+                <td><input type="text" class="answer-input" data-correct-answer="เพลงตับ" placeholder="พิมพ์คำตอบ"></td>
+            </tr>
+            <tr>
+                <td>๘.</td>
+                <td>ลาวคำหอม</td>
+                <td><input type="text" class="answer-input" data-correct-answer="เพลงเถา" placeholder="พิมพ์คำตอบ"></td>
+            </tr>
+            <tr>
+                <td>๙.</td>
+                <td>โหมโรงมหาราช</td>
+                <td><input type="text" class="answer-input" data-correct-answer="เพลงโหมโรง" placeholder="พิมพ์คำตอบ"></td>
+            </tr>
+            <tr>
+                <td>๑๐.</td>
+                <td>เพลงเรื่องฉิ่ง</td>
+                <td><input type="text" class="answer-input" data-correct-answer="เพลงเรื่อง" placeholder="พิมพ์คำตอบ"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="button-container flex">
+        <button class="back-button" onclick="goToPage(1)"><i class="fas fa-arrow-left"></i> ย้อนกลับ</button>
+        <button class="check-button" onclick="goToPage(3)">ตรวจคำตอบ <i class="fas fa-check-circle"></i></button>
+    </div>
 </div>
-
-
 
 <div class="container hidden" id="page-3">
-
-    <div class="summary-container printable-summary" id="printable-summary-section">
-
-        <div class="header">
-
-            <h1>สรุปผลการทำใบงาน</h1>
-
-            <p>ใบงานที่ ๓.๓ เรื่อง: บทเพลงไทยแต่ละชนิด</p>
-
-        </div>
-
-        <div class="summary-info-wrapper">
-
-            <div class="summary-info-item"><label>ชื่อ-สกุล:</label> <span id="summary-name"></span></div>
-
-            <div class="summary-info-item"><label>ชั้น:</label> <span id="summary-class"></span></div>
-
-            <div class="summary-info-item"><label>เลขที่:</label> <span id="summary-number"></span></div>
-
-        </div>
-
-        <div class="score-display">
-
-            คะแนนรวม: <span id="score">0</span> / 10
-
-        </div>
-
-        <table class="summary-table">
-
-            <thead>
-
-                <tr>
-
-                    <th>ข้อ</th>
-
-                    <th>คำถาม</th>
-
-                    <th>คำตอบของนักเรียน</th>
-
-                    <th>ผลการตรวจ</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="summary-table-body"></tbody>
-
-        </table>
-
-    </div>
-
-    <div class="button-container flex">
-
-        <button class="back-button" onclick="resetAndGoToPage(2)"><i class="fas fa-redo"></i> กลับไปทำใหม่</button>
-
-        <button class="save-button" onclick="saveAsImage()"><i class="fas fa-download"></i> บันทึกเป็นรูปภาพ</button>
-
-    </div>
-
-    <div id="image-output"></div>
-
+    <div class="summary-container printable-summary" id="printable-summary-section">
+        <div class="header">
+            <h1>สรุปผลการทำใบงาน</h1>
+            <p>ใบงานที่ ๓.๓ เรื่อง: บทเพลงไทยแต่ละชนิด</p>
+        </div>
+        <div class="summary-info-wrapper">
+            <div class="summary-info-item"><label>ชื่อ-สกุล:</label> <span id="summary-name"></span></div>
+            <div class="summary-info-item"><label>ชั้น:</label> <span id="summary-class"></span></div>
+            <div class="summary-info-item"><label>เลขที่:</label> <span id="summary-number"></span></div>
+        </div>
+        <div class="score-display">
+            คะแนนรวม: <span id="score">0</span> / 10
+        </div>
+        <table class="summary-table">
+            <thead>
+                <tr>
+                    <th>ข้อ</th>
+                    <th>คำถาม</th>
+                    <th>คำตอบของนักเรียน</th>
+                    <th>ผลการตรวจ</th>
+                </tr>
+            </thead>
+            <tbody id="summary-table-body"></tbody>
+        </table>
+    </div>
+    <div class="button-container flex">
+        <button class="back-button" onclick="resetAndGoToPage(2)"><i class="fas fa-redo"></i> กลับไปทำใหม่</button>
+        <button class="save-button" onclick="saveAsImage()"><i class="fas fa-download"></i> บันทึกเป็นรูปภาพ</button>
+    </div>
+    <div id="image-output"></div>
 </div>
 
-
-
 <script>
-
-    function goToPage(pageNumber) {
-
-        const pages = ['page-1', 'page-2', 'page-3'];
-
-        pages.forEach(id => {
-
-            document.getElementById(id).classList.add('hidden');
-
-        });
-
-        document.getElementById(`page-${pageNumber}`).classList.remove('hidden');
-
-
-
-        if (pageNumber === 3) {
-
-            checkAnswers();
-
-        }
-
-    }
-
-    
-
-    function resetAndGoToPage(pageNumber) {
-
-        const answerInputs = document.querySelectorAll('.answer-input');
-
-        answerInputs.forEach(input => {
-
-            input.value = '';
-
-            input.classList.remove('correct', 'incorrect');
-
-        });
-
-        goToPage(pageNumber);
-
-    }
-
-
-
-    function checkAnswers() {
-
-        const studentName = document.getElementById('student-name').value.trim();
-
-        const studentClass = document.getElementById('student-class').value.trim();
-
-        const studentNumber = document.getElementById('student-number').value.trim();
-
-
-
-        if (studentName === '' || studentClass === '' || studentNumber === '') {
-
-            alert('กรุณากรอก ชื่อ-สกุล ชั้น และเลขที่ ให้ครบถ้วน');
-
-            goToPage(1);
-
-            return;
-
-        }
-
-
-
-        const answerInputs = document.querySelectorAll('.answer-input');
-
-        let score = 0;
-
-        const summaryTableBody = document.getElementById('summary-table-body');
-
-        summaryTableBody.innerHTML = '';
-
-        
-
-        const questions = [
-
-            "ตับวิวาห์พระสมุทร",
-
-            "เขมรไทรโยค",
-
-            "โหมโรงไอยเรศ",
-
-            "เพลงเรื่องปรบไก่",
-
-            "แป๊ะ",
-
-            "สาธุการ",
-
-            "ตับนางลอย",
-
-            "ลาวคำหอม",
-
-            "โหมโรงมหาราช",
-
-            "เพลงเรื่องฉิ่ง"
-
-        ];
-
-        
-
-        answerInputs.forEach((input, index) => {
-
-            const userAnswer = input.value.trim().toLowerCase().replace(/\s+/g, ' ');
-
-            const correctAnswer = input.getAttribute('data-correct-answer').trim().toLowerCase().replace(/\s+/g, ' ');
-
-            
-
-            const userIsCorrect = (userAnswer === correctAnswer || userAnswer === correctAnswer.replace('เพลง', ''));
-
-
-
-            input.classList.remove('correct', 'incorrect');
-
-            if (userIsCorrect) {
-
-                input.classList.add('correct');
-
-                score++;
-
-            } else {
-
-                input.classList.add('incorrect');
-
-            }
-
-
-
-            const row = document.createElement('tr');
-
-            const resultEmoji = userIsCorrect ? '✅' : '❌';
-
-            const resultText = userIsCorrect ? 'ถูกต้อง' : 'ผิดพลาด';
-
-
-
-            row.innerHTML = `
-
-                <td>${index + 1}</td>
-
-                <td>${questions[index]}</td>
-
-                <td>${input.value}</td>
-
-                <td>${resultEmoji} ${resultText}</td>
-
-            `;
-
-            summaryTableBody.appendChild(row);
-
-        });
-
-        
-
-        // Update summary info for the printable view
-
-        document.getElementById('summary-name').innerText = studentName;
-
-        document.getElementById('summary-class').innerText = studentClass;
-
-        document.getElementById('summary-number').innerText = studentNumber;
-
-
-
-        document.getElementById('score').innerText = score;
-
-    }
-
-
-
-    function saveAsImage() {
-
-        const summaryElement = document.getElementById('printable-summary-section');
-
-        
-
-        // 1. เพิ่ม class เพื่อปรับขนาดก่อนบันทึกภาพ
-
-        summaryElement.classList.add('ready-for-capture');
-
-
-
-        html2canvas(summaryElement, {
-
-            scale: 1.5, // ลด scale เล็กน้อยเพื่อชดเชยกับขนาดที่ใหญ่ขึ้น
-
-            logging: false,
-
-            useCORS: true
-
-        }).then(canvas => {
-
-            // 2. ลบ class ออกทันทีหลังจากที่ html2canvas ประมวลผลเสร็จ
-
-            summaryElement.classList.remove('ready-for-capture');
-
-            
-
-            const outputDiv = document.getElementById('image-output');
-
-            outputDiv.innerHTML = '';
-
-            const image = new Image();
-
-            image.src = canvas.toDataURL('image/png');
-
-            image.className = 'output-image';
-
-            outputDiv.appendChild(image);
-
-            
-
-            const link = document.createElement('a');
-
-            const studentName = document.getElementById('student-name').value.trim();
-
-            link.download = `สรุปผลใบงานที่-3-3-${studentName}.png`; 
-
-            link.href = canvas.toDataURL('image/png');
-
-            document.body.appendChild(link);
-
-            link.click();
-
-            document.body.removeChild(link);
-
-        });
-
-    }
-
+    function goToPage(pageNumber) {
+        const pages = ['page-1', 'page-2', 'page-3'];
+        pages.forEach(id => {
+            document.getElementById(id).classList.add('hidden');
+        });
+        document.getElementById(`page-${pageNumber}`).classList.remove('hidden');
+
+        if (pageNumber === 3) {
+            checkAnswers();
+        }
+    }
+    
+    function resetAndGoToPage(pageNumber) {
+        const answerInputs = document.querySelectorAll('.answer-input');
+        answerInputs.forEach(input => {
+            input.value = '';
+            input.classList.remove('correct', 'incorrect');
+        });
+        goToPage(pageNumber);
+    }
+
+    function checkAnswers() {
+        const studentName = document.getElementById('student-name').value.trim();
+        const studentClass = document.getElementById('student-class').value.trim();
+        const studentNumber = document.getElementById('student-number').value.trim();
+
+        if (studentName === '' || studentClass === '' || studentNumber === '') {
+            alert('กรุณากรอก ชื่อ-สกุล ชั้น และเลขที่ ให้ครบถ้วน');
+            goToPage(1);
+            return;
+        }
+
+        const answerInputs = document.querySelectorAll('.answer-input');
+        let score = 0;
+        const summaryTableBody = document.getElementById('summary-table-body');
+        summaryTableBody.innerHTML = '';
+        
+        const questions = [
+            "ตับวิวาห์พระสมุทร",
+            "เขมรไทรโยค",
+            "โหมโรงไอยเรศ",
+            "เพลงเรื่องปรบไก่",
+            "แป๊ะ",
+            "สาธุการ",
+            "ตับนางลอย",
+            "ลาวคำหอม",
+            "โหมโรงมหาราช",
+            "เพลงเรื่องฉิ่ง"
+        ];
+        
+        answerInputs.forEach((input, index) => {
+            const userAnswer = input.value.trim().toLowerCase().replace(/\s+/g, ' ');
+            const correctAnswer = input.getAttribute('data-correct-answer').trim().toLowerCase().replace(/\s+/g, ' ');
+            
+            const userIsCorrect = (userAnswer === correctAnswer || userAnswer === correctAnswer.replace('เพลง', ''));
+
+            input.classList.remove('correct', 'incorrect');
+            if (userIsCorrect) {
+                input.classList.add('correct');
+                score++;
+            } else {
+                input.classList.add('incorrect');
+            }
+
+            const row = document.createElement('tr');
+            const resultEmoji = userIsCorrect ? '✅' : '❌';
+            const resultText = userIsCorrect ? 'ถูกต้อง' : 'ผิดพลาด';
+
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${questions[index]}</td>
+                <td>${input.value}</td>
+                <td>${resultEmoji} ${resultText}</td>
+            `;
+            summaryTableBody.appendChild(row);
+        });
+        
+        // Update summary info for the printable view
+        document.getElementById('summary-name').innerText = studentName;
+        document.getElementById('summary-class').innerText = studentClass;
+        document.getElementById('summary-number').innerText = studentNumber;
+
+        document.getElementById('score').innerText = score;
+    }
+
+    function saveAsImage() {
+        const summaryElement = document.getElementById('printable-summary-section');
+        
+        // 1. เพิ่ม class เพื่อปรับขนาดก่อนบันทึกภาพ
+        summaryElement.classList.add('ready-for-capture');
+
+        html2canvas(summaryElement, {
+            scale: 1.5, // ลด scale เล็กน้อยเพื่อชดเชยกับขนาดที่ใหญ่ขึ้น
+            logging: false,
+            useCORS: true
+        }).then(canvas => {
+            // 2. ลบ class ออกทันทีหลังจากที่ html2canvas ประมวลผลเสร็จ
+            summaryElement.classList.remove('ready-for-capture');
+            
+            const outputDiv = document.getElementById('image-output');
+            outputDiv.innerHTML = '';
+            const image = new Image();
+            image.src = canvas.toDataURL('image/png');
+            image.className = 'output-image';
+            outputDiv.appendChild(image);
+            
+            const link = document.createElement('a');
+            const studentName = document.getElementById('student-name').value.trim();
+            link.download = `สรุปผลใบงานที่-3-3-${studentName}.png`; 
+            link.href = canvas.toDataURL('image/png');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    }
 </script>
 
-
-
 </body>
-
 </html>
