@@ -112,14 +112,19 @@
 
         .instructions {
             padding: 20px;
-            background-color: var(--light-blue-2);
+            background-color: var(--secondary-color);
             border-left: 5px solid var(--primary-color);
             border-radius: 12px;
             margin-bottom: 30px;
             font-size: 1rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            color: white;
         }
         
+        .instructions strong, .instructions p {
+            color: white;
+        }
+
         .song-types-list {
             padding: 25px;
             background-color: var(--background-color);
@@ -621,7 +626,8 @@
             
             const link = document.createElement('a');
             const studentName = document.getElementById('student-name').value.trim();
-            link.download = `สรุปผลใบงานที่-3-3-${studentName}.png`;
+            // ตั้งชื่อไฟล์ตามชื่อนักเรียน
+            link.download = `สรุปผลใบงานที่-3-3-${studentName}.png`; 
             link.href = canvas.toDataURL('image/png');
             document.body.appendChild(link);
             link.click();
