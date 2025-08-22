@@ -35,8 +35,8 @@
         
         .container {
             width: 95%;
-            max-width: 700px;
-            padding: 30px;
+            max-width: 1000px; /* แก้ไขค่าตรงนี้เป็น 1000px */
+            padding: 50px; /* แก้ไขค่าตรงนี้เป็น 50px */
             background-color: var(--card-color);
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -279,7 +279,7 @@
             margin-bottom: 20px;
             color: var(--text-color);
         }
-        /* NEW: Styles for the print/image-ready version */
+        
         .printable-summary {
             padding: 20px;
             background-color: var(--card-color);
@@ -288,30 +288,35 @@
             box-sizing: border-box;
             text-align: center;
             width: 100%;
-            max-width: 600px;
+            max-width: 900px; /* ลดค่านี้ลงเล็กน้อยจากหน้าหลัก เพื่อให้ภาพที่บันทึกมีขนาดเหมาะสม */
             margin: 0 auto;
         }
+        
         .printable-summary .summary-title, .printable-summary .summary-info, .printable-summary .score-display {
             margin-bottom: 15px;
         }
+        
         .printable-summary .summary-table {
             margin-top: 15px;
         }
+        
         .printable-summary .summary-table th, .printable-summary .summary-table td {
-            padding: 8px; /* Compact padding */
-            font-size: 0.9rem; /* Smaller font for better fit */
+            padding: 8px;
+            font-size: 0.9rem;
         }
+        
         .printable-info {
             display: flex;
             flex-direction: column;
             gap: 5px;
             margin-bottom: 20px;
         }
+        
         .printable-info span {
             display: block;
             text-align: center;
         }
-        /* Fix for mobile view */
+        
         .summary-info-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -319,11 +324,13 @@
             gap: 10px;
             margin-bottom: 20px;
         }
+        
         .summary-info-item {
             display: flex;
             align-items: center;
             gap: 5px;
         }
+        
         .summary-info-item label {
             font-weight: bold;
             color: var(--text-color);
@@ -384,13 +391,6 @@
             border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* เพิ่มสไตล์สำหรับตอนที่จะบันทึกภาพโดยเฉพาะ */
-        .ready-for-capture {
-            width: 1000px !important;
-            padding: 50px !important;
-            box-shadow: none !important;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
@@ -608,28 +608,20 @@
             summaryTableBody.appendChild(row);
         });
         
-        // Update summary info for the printable view
         document.getElementById('summary-name').innerText = studentName;
         document.getElementById('summary-class').innerText = studentClass;
         document.getElementById('summary-number').innerText = studentNumber;
-
         document.getElementById('score').innerText = score;
     }
 
     function saveAsImage() {
         const summaryElement = document.getElementById('printable-summary-section');
         
-        // 1. เพิ่ม class เพื่อปรับขนาดก่อนบันทึกภาพ
-        summaryElement.classList.add('ready-for-capture');
-
         html2canvas(summaryElement, {
-            scale: 1.5, // ลด scale เล็กน้อยเพื่อชดเชยกับขนาดที่ใหญ่ขึ้น
+            scale: 2, 
             logging: false,
             useCORS: true
         }).then(canvas => {
-            // 2. ลบ class ออกทันทีหลังจากที่ html2canvas ประมวลผลเสร็จ
-            summaryElement.classList.remove('ready-for-capture');
-            
             const outputDiv = document.getElementById('image-output');
             outputDiv.innerHTML = '';
             const image = new Image();
